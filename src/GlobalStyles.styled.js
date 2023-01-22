@@ -8,7 +8,11 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing:border-box;
         a{
             text-decoration:none;
+            color: black;
         }
+        strong{
+        font-weight: 700;
+       }
     }
     html{
         font-size:62.5%;
@@ -16,12 +20,11 @@ export const GlobalStyles = createGlobalStyle`
     body {
     font-size: 1.5rem; 
     color: black;
-   
   }
 `;
 export const Container = styled.div`
-    max-width: 1440px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0 auto;
+  max-width: 1440px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
 `;

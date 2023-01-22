@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: row;
   padding-top: 4rem;
+  padding-bottom: 4rem;
 `;
 export const LoginImg = styled.img`
   width: 40rem;

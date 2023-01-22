@@ -123,6 +123,8 @@ export const DropDown = styled(Menu)`
 `;
 export const HeaderNavigation = styled.div`
   width: 80%;
+  padding-left: 1rem;
+  margin: auto 0;
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: ${colors.green};
     font-weight: 400;
