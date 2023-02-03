@@ -1,9 +1,9 @@
 import './App.css';
-import HomePage from './pages/homapage/HomePage';
-import Login from './pages/login/LoginPage';
+import router from './Routers';
 
 import { ConfigProvider } from 'antd';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
+
 function App() {
   return (
     <ConfigProvider
@@ -13,8 +13,7 @@ function App() {
         },
       }}
     >
-      
-      <HomePage></HomePage>;
+      <RouterProvider router={router} />
     </ConfigProvider>
   );
 }

@@ -23,8 +23,11 @@ import {
 import images from '../../assets/images';
 import { SettingOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+  const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
   function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -46,7 +49,7 @@ const Header = () => {
     {
       key: '4',
       label: `Home`,
-      //   children: `Content of Tab Pane 1`,
+      // children: `Content of Tab Pane 1`,
     },
     {
       key: '5',
@@ -100,12 +103,20 @@ const Header = () => {
           </WishListItem>
           <CartItem>
             <CartIcon></CartIcon>
-            <a href="/">Cart</a>
+            <Link to="/cart">Cart</Link>
           </CartItem>
-          <LoginItem>
-            <LoginIcon></LoginIcon>
-            <a href="/">Login</a>
-          </LoginItem>
+
+          {token ? (
+            <LoginItem>
+              <LoginIcon></LoginIcon>
+              <a href="/profile">{username}</a>
+            </LoginItem>
+          ) : (
+            <LoginItem>
+              <LoginIcon></LoginIcon>
+              <a href="/login">Login</a>
+            </LoginItem>
+          )}
         </HeaderIcon>
       </HeaderBetween>
       <HeaderBottom>

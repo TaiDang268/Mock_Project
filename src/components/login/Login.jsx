@@ -3,8 +3,31 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import { Container, LoginForm, LoginImg, LoginText, RegisterText } from './Login.styled';
 import images from '../../assets/images';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const loginUrl = 'http://viet.fresher.ameladev.click/api/login';
+  const onFinish = async (values) => {
+    const instance = axios.create({ baseURL: loginUrl, timeout: 1000 });
+    const loginData = { email: values.username, password: values.password };
+    await instance
+      .post(loginUrl, loginData)
+      .then(function (response) {
+        if (!response.data.data) {
+          console.log('login failed');
+        }
+        console.log(response);
+        localStorage.setItem('token', response.data.authorisation.token);
+        localStorage.setItem('username', response.data.user.name);
+
+        navigate('/homepage');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <Container>
       <LoginImg src={images.Login}></LoginImg>
@@ -13,7 +36,7 @@ const Login = () => {
           <span>LOGIN</span>
           <RegisterText>
             <p>Don't have an acount?</p>
-            <a href="/">Create here</a>
+            <a href="/register">Create here</a>
           </RegisterText>
         </LoginText>
         <Form
@@ -22,7 +45,7 @@ const Login = () => {
           initialValues={{
             remember: true,
           }}
-          // onFinish={onFinish}
+          onFinish={onFinish}
         >
           <Form.Item
             name="username"

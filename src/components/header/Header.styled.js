@@ -102,7 +102,7 @@ export const CartIcon = styled(ShoppingCartOutlined)`
 
 export const LoginItem = styled.div``;
 export const LoginIcon = styled(UserOutlined)`
-  padding-right: 1rem;
+  padding: 1rem;
 `;
 
 export const HeaderBottom = styled.div`
