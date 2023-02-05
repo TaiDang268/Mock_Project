@@ -100,7 +100,11 @@ export const CartIcon = styled(ShoppingCartOutlined)`
   padding-right: 1rem;
 `;
 
-export const LoginItem = styled.div``;
+export const LoginItem = styled.div`
+  .logined-name {
+    color: ${colors.green};
+  }
+`;
 export const LoginIcon = styled(UserOutlined)`
   padding: 1rem;
 `;

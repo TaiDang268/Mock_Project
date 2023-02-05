@@ -1,32 +1,44 @@
 import { Container, Wrapper } from './Register.styled';
 import { Button, Form, Input, Radio } from 'antd';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../../redux/apiRequest';
+import { useDispatch } from 'react-redux';
 
 const Register = () => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const registerUrl = 'http://viet.fresher.ameladev.click/api/register';
-  const onFinish = async (values) => {
-    const instance = axios.create({ baseURL: registerUrl, timeout: 1000 });
-    const registerData = { name: values.name, email: values.email, password: values.password };
-    // console.log(registerData);
-    await instance
-      .post(registerUrl, registerData)
-
-      .then(function (response) {
-        if (!response.data.user.token) {
-          console.log('register failed');
-        }
-        console.log(response);
-        localStorage.setItem('token', response.data.authorisation.token);
-        navigate('/homepage');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const onFinish = (values) => {
+    const newUser = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      phone: values.phone,
+      address: values.address,
+      gender: values.gender,
+    };
+    registerUser(newUser, dispatch, navigate);
   };
+  // const registerUrl = 'http://viet.fresher.ameladev.click/api/register';
+  // const onFinish = async (values) => {
+  //   const instance = axios.create({ baseURL: registerUrl, timeout: 1000 });
+  //   const registerData = { name: values.name, email: values.email, password: values.password };
+  //   // console.log(registerData);
+  //   await instance
+  //     .post(registerUrl, registerData)
+
+  //     .then(function (response) {
+  //       if (!response.data.user.token) {
+  //         console.log('register failed');
+  //       }
+  //       console.log(response);
+  //       localStorage.setItem('token', response.data.authorisation.token);
+  //       navigate('/homepage');
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
   return (
     <Container>
       <Wrapper>
@@ -164,7 +176,7 @@ const Register = () => {
             //  onChange={onChange} value={value}
             >
               <Radio value={1}>Nam</Radio>
-              <Radio value={2}>Nữ</Radio>
+              <Radio value={0}>Nữ</Radio>
             </Radio.Group>
           </Form.Item>
           {/* <Form.Item label="Birthday">

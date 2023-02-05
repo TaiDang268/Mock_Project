@@ -23,11 +23,20 @@ import {
 import images from '../../assets/images';
 import { SettingOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username');
+  const navigate = useNavigate();
+  const onTabClick = (key) => {
+    switch (key) {
+      case '4':
+        navigate('/homepage');
+        break;
+      default:
+    }
+  };
+  const user = useSelector((state) => state.auth.login.currentUser);
   function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -105,16 +114,17 @@ const Header = () => {
             <CartIcon></CartIcon>
             <Link to="/cart">Cart</Link>
           </CartItem>
-
-          {token ? (
+          {user ? (
             <LoginItem>
               <LoginIcon></LoginIcon>
-              <a href="/profile">{username}</a>
+              <Link to="/profile">
+                <span className='logined-name'>{user.user.name}</span>
+              </Link>
             </LoginItem>
           ) : (
             <LoginItem>
               <LoginIcon></LoginIcon>
-              <a href="/login">Login</a>
+              <Link to="/login">Login</Link>
             </LoginItem>
           )}
         </HeaderIcon>
@@ -131,7 +141,7 @@ const Header = () => {
           ></DropDown>
         </HeaderDropDown>
         <HeaderNavigation>
-          <Tabs defaultActiveKey="1" items={itemsNavigation} />
+          <Tabs defaultActiveKey="4" items={itemsNavigation} onTabClick={onTabClick} />
         </HeaderNavigation>
       </HeaderBottom>
     </Container>

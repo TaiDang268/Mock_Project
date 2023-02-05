@@ -2,7 +2,7 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Product from '../../components/product/Product';
 import { ListProduct } from './HomePage.styled';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 const HomePage = () => {
   const fake_product = [
     {
@@ -63,8 +63,6 @@ const HomePage = () => {
     },
   ];
   // const { cart } = useSelector((item) => item.cart);
-  const state = useSelector((item) => item.cart);
-  console.log(state);
   return (
     <>
       <Header></Header>

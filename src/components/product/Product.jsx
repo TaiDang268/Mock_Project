@@ -1,7 +1,7 @@
 import images from '../../assets/images';
 import { AddBtn, Container, ProductCategory, ProductImg, ProductName, ProductPrice, Wrapper } from './Product.styled';
 import { useDispatch } from 'react-redux';
-import { AddCart } from '../../redux/cartSystem';
+import { AddCart } from '../../redux/CartSlice';
 const Product = (item) => {
   const dispatch = useDispatch();
   return (
