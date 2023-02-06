@@ -3,9 +3,11 @@ import cartSlice from './CartSlice';
 import AuthSlice from './AuthSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import ProfileSlice from './ProfileSlice';
 const rootReducer = combineReducers({
   cart: cartSlice,
   auth: AuthSlice,
+  profile: ProfileSlice,
 });
 const persistConfig = {
   key: 'root',

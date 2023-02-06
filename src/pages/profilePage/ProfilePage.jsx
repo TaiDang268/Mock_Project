@@ -1,11 +1,11 @@
 import { Button, Form, Input, Radio } from 'antd';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
-import { logOut } from '../../redux/apiRequest';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { Content } from './Profile.styled';
-import request from '../../API';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../redux/apiRequest';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
   const [form] = Form.useForm();
@@ -13,11 +13,11 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
-  // const userProfile = async () => {};
+  const profile = useSelector((state) => state.profile.userProfile);
+  console.log(profile);
+  console.log(user);
+
   const handleLogout = () => {
-    request.post('logout', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
     logOut(dispatch, navigate, token);
   };
   const handelUpdate = () => {};

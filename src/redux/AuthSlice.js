@@ -48,9 +48,9 @@ const authSlice = createSlice({
       state.logout.isFetching = true;
     },
     logoutSuccess: (state) => {
-      state.logout.isFetching = false;
+      // state.logout.isFetching = false;
       state.login.currentUser = null;
-      state.logout.error = false;
+      // state.logout.error = false;
     },
     logoutFailed: (state) => {
       state.logout.isFetching = false;

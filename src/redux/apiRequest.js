@@ -2,14 +2,14 @@ import {
   loginFailed,
   loginStart,
   loginSuccess,
-  logoutFailed,
-  logoutStart,
   logoutSuccess,
   registerFailed,
   registerStart,
   registerSuccess,
 } from './AuthSlice';
 import request from '../API';
+import { resetCart } from './CartSlice';
+import { showProfile } from './ProfileSlice';
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
@@ -31,15 +31,28 @@ export const registerUser = async (user, dispatch, navigate) => {
   }
 };
 export const logOut = async (dispatch, navigate, token) => {
-  dispatch(logoutStart());
   try {
-    await request.post('logout', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await request.post(
+      'logout',
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
     dispatch(logoutSuccess());
+    dispatch(resetCart());
     navigate('/login');
   } catch (error) {
     console.log(error);
-    dispatch(logoutFailed());
+  }
+};
+export const show = async ( dispatch, token) => {
+  try {
+    await request.get('profile-user', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    dispatch(showProfile())
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -4,7 +4,6 @@ import {
   CompareIcon,
   CompareItem,
   Container,
-  DropDown,
   HeaderBetween,
   HeaderBottom,
   HeaderDropDown,
@@ -21,12 +20,16 @@ import {
   WishListItem,
 } from './Header.styled';
 import images from '../../assets/images';
-import { SettingOutlined } from '@ant-design/icons';
+import { DownOutlined } from '@ant-design/icons';
+import { Dropdown, message, Space } from 'antd';
 import { Tabs } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import request from '../../API';
+import { showProfile } from '../../redux/ProfileSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onTabClick = (key) => {
     switch (key) {
@@ -37,28 +40,53 @@ const Header = () => {
     }
   };
   const user = useSelector((state) => state.auth.login.currentUser);
-  function getItem(label, key, icon, children, type) {
-    return {
-      key,
-      // icon,
-      children,
-      label,
-      type,
-    };
-  }
-  const itemsDropDown = [
-    getItem('All Category', 'sub4', <SettingOutlined />, [
-      getItem('Option 9', '9'),
-      getItem('Option 10', '10'),
-      getItem('Option 11', '11'),
-      getItem('Option 12', '12'),
-    ]),
+  const token = user?.authorisation.token;
+  const allCategory = [];
+  const handleAllCategory = async () => {
+    await request
+      .get('admin/list-category')
+      .then(function (response) {
+        allCategory.push(response.data.data.data[0].name);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const profile = useSelector((state) => state.profile.userProfile);
+  const handleShowProfile = async () => {
+    await request
+      .get('profile-user', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(function (response) {
+        dispatch(showProfile(response.data.profile));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const onClick = ({ key }) => {
+    message.info(`Click on item ${key}`);
+  };
+  const items = [
+    {
+      label: '1st menu item',
+      key: '1',
+    },
+    {
+      label: '2nd menu item',
+      key: '2',
+    },
+    {
+      label: '3rd menu item',
+      key: '3',
+    },
   ];
+
   const itemsNavigation = [
     {
       key: '4',
       label: `Home`,
-      // children: `Content of Tab Pane 1`,
     },
     {
       key: '5',
@@ -117,8 +145,8 @@ const Header = () => {
           {user ? (
             <LoginItem>
               <LoginIcon></LoginIcon>
-              <Link to="/profile">
-                <span className='logined-name'>{user.user.name}</span>
+              <Link to="/profile" onClick={handleShowProfile}>
+                <span className="logined-name">{user.user.name}</span>
               </Link>
             </LoginItem>
           ) : (
@@ -131,14 +159,17 @@ const Header = () => {
       </HeaderBetween>
       <HeaderBottom>
         <HeaderDropDown>
-          <DropDown
-            forceSubMenuRender
-            mode="horizontal"
-            style={{
-              width: 256,
+          <Dropdown
+            menu={{
+              items,
+              onClick,
             }}
-            items={itemsDropDown}
-          ></DropDown>
+          >
+            <Space onClick={handleAllCategory}>
+              All Category
+              <DownOutlined />
+            </Space>
+          </Dropdown>
         </HeaderDropDown>
         <HeaderNavigation>
           <Tabs defaultActiveKey="4" items={itemsNavigation} onTabClick={onTabClick} />

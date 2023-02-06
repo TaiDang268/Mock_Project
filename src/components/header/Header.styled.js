@@ -110,6 +110,7 @@ export const LoginIcon = styled(UserOutlined)`
 `;
 
 export const HeaderBottom = styled.div`
+  margin: 0 5%;
   height: 10rem;
   border-bottom: 1px solid #ececec;
   display: flex;
@@ -120,6 +121,16 @@ export const HeaderDropDown = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  .ant-space {
+    margin 0 auto;
+    padding-left:2rem;
+    display: flex:
+    justify-content:center;
+    border-radius: 1rem;
+    width: 14rem;
+    height: 5rem;
+    background-color: ${colors.green};
+  }
 `;
 export const DropDown = styled(Menu)`
   border-radius: 0.5rem;

@@ -5,6 +5,7 @@ import { Button } from 'antd';
 export const Container = styled.div`
   margin: 2rem;
   width: 15%;
+  height: 30rem;
   border-radius: 1.5rem;
   background-color: #f5f5f5;
 
@@ -32,6 +33,7 @@ export const ProductName = styled.h4`
   font-size: 2rem;
 `;
 export const Wrapper = styled.div`
+  height: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,6 +46,7 @@ export const ProductPrice = styled.span`
 `;
 export const AddBtn = styled(Button)`
   background-color: #def9ec;
+
   :hover {
     background-color: #3bb77e;
     span {
