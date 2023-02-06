@@ -5,7 +5,7 @@ import { logOut } from '../../redux/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Content } from './Profile.styled';
-import axios from 'axios';
+import request from '../../API';
 
 const ProfilePage = () => {
   const [form] = Form.useForm();
@@ -13,27 +13,14 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
-  const userProfile = async () => {
-    try {
-      await axios.get('http://viet.fresher.ameladev.click/api/profile-user', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const userProfile = async () => {};
   const handleLogout = () => {
-    // axios.post('http://viet.fresher.ameladev.click/api/logout', {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // });
-    logOut(dispatch, navigate, token);
-  };
-  const handelUpdate = () => {
-    const res = axios.get('http://viet.fresher.ameladev.click/api/profile-user', {
+    request.post('logout', {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(res);
+    logOut(dispatch, navigate, token);
   };
+  const handelUpdate = () => {};
   return (
     <>
       <Header></Header>

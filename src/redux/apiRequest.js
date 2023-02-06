@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   loginFailed,
   loginStart,
@@ -10,10 +9,11 @@ import {
   registerStart,
   registerSuccess,
 } from './AuthSlice';
+import request from '../API';
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
-    const res = await axios.post('http://viet.fresher.ameladev.click/api/login', user);
+    const res = await request.post('login', user);
     dispatch(loginSuccess(res.data));
     navigate('/homepage');
   } catch (err) {
@@ -23,7 +23,7 @@ export const loginUser = async (user, dispatch, navigate) => {
 export const registerUser = async (user, dispatch, navigate) => {
   dispatch(registerStart());
   try {
-    await axios.post('http://viet.fresher.ameladev.click/api/register', user);
+    await request.post('register', user);
     dispatch(registerSuccess());
     navigate('/login');
   } catch (err) {
@@ -33,7 +33,7 @@ export const registerUser = async (user, dispatch, navigate) => {
 export const logOut = async (dispatch, navigate, token) => {
   dispatch(logoutStart());
   try {
-    await axios.post('http://viet.fresher.ameladev.click/api/logout', {
+    await request.post('logout', {
       headers: { Authorization: `Bearer ${token}` },
     });
     dispatch(logoutSuccess());
@@ -43,4 +43,3 @@ export const logOut = async (dispatch, navigate, token) => {
     dispatch(logoutFailed());
   }
 };
-
