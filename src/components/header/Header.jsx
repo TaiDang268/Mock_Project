@@ -27,6 +27,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import request from '../../API';
 import { showProfile } from '../../redux/ProfileSlice';
+import axios from 'axios';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -39,20 +40,25 @@ const Header = () => {
       default:
     }
   };
+
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
-  const allCategory = [];
   const handleAllCategory = async () => {
     await request
       .get('admin/list-category')
-      .then(function (response) {
-        allCategory.push(response.data.data.data[0].name);
+      .then((response) => {
+        const data = response.data.data.data;
+        const arrCategory = data.reduce((list, item) => list.concat(item.name), []);
+        console.log(arrCategory);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
-  const profile = useSelector((state) => state.profile.userProfile);
+  // console.log(allCategory);
+  // const handleAllCategory = () => {
+  //   console.log('ass');
+  // };
   const handleShowProfile = async () => {
     await request
       .get('profile-user', {
@@ -62,6 +68,17 @@ const Header = () => {
         dispatch(showProfile(response.data.profile));
       })
       .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const onSearch = async (value) => {
+    await axios
+      .get(`http://172.16.21.143/api/admin/search/${value}`)
+      .then((response) => {
+        console.log(response);
+        navigate('/homepage');
+      })
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -128,7 +145,7 @@ const Header = () => {
       </HeaderTop>
       <HeaderBetween>
         <LogoShop src={images.LogoShop}></LogoShop>
-        <SearchForm placeholder="Search..."></SearchForm>
+        <SearchForm placeholder="Search..." onSearch={onSearch}></SearchForm>
         <HeaderIcon>
           <CompareItem>
             <CompareIcon></CompareIcon>

@@ -18,28 +18,6 @@ const Login = () => {
     };
     loginUser(newUser, dispatch, navigate);
   };
-
-  // const navigate = useNavigate();
-  // const loginUrl = 'http://viet.fresher.ameladev.click/api/login';
-  // const onFinish = async (values) => {
-  //   const instance = axios.create({ baseURL: loginUrl, timeout: 1000 });
-  //   const loginData = { email: values.username, password: values.password };
-  //   await instance
-  //     .post(loginUrl, loginData)
-  //     .then(function (response) {
-  //       if (!response.data.data) {
-  //         console.log('login failed');
-  //       }
-  //       console.log(response);
-  //       localStorage.setItem('token', response.data.authorisation.token);
-  //       localStorage.setItem('username', response.data.user.name);
-
-  //       navigate('/homepage');
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
   return (
     <Container>
       <LoginImg src={images.Login}></LoginImg>

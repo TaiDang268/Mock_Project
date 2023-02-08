@@ -1,4 +1,4 @@
-import { Button, Form, Input, Radio } from 'antd';
+import { Button, Form, Input } from 'antd';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 import { Content } from './Profile.styled';
@@ -14,9 +14,11 @@ const ProfilePage = () => {
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
   const profile = useSelector((state) => state.profile.userProfile);
-  console.log(profile);
-  console.log(user);
 
+
+  const genderUser = (gender) => {
+    return gender === 1 ? 'Nam' : 'Nữ';
+  };
   const handleLogout = () => {
     logOut(dispatch, navigate, token);
   };
@@ -30,7 +32,11 @@ const ProfilePage = () => {
           name="update"
           // onFinish={onFinish}
           initialValues={{
-            residence: ['zhejiang', 'hangzhou', 'xihu'],
+            email: [user.user.email],
+            name: [user.user.name],
+            phone: [profile.phone],
+            address: [profile.address],
+            gender: [genderUser(profile.gender)],
             prefix: '86',
           }}
           style={{
@@ -64,17 +70,17 @@ const ProfilePage = () => {
           </Form.Item>
           <Form.Item name="address" label="Address ">
             <Input
-              //   addonBefore={prefixSelector}
               style={{
                 width: '100%',
               }}
             />
           </Form.Item>
           <Form.Item name="gender" label="Gender">
-            <Radio.Group>
-              <Radio value={1}>Nam</Radio>
-              <Radio value={0}>Nữ</Radio>
-            </Radio.Group>
+            <Input
+              style={{
+                width: '100%',
+              }}
+            />
           </Form.Item>
           <div className="wrapper-btn">
             <Form.Item>

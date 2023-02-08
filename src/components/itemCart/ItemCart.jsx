@@ -1,5 +1,4 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import images from '../../assets/images';
 import {
   Container,
   ProductImg,
@@ -10,31 +9,32 @@ import {
   ProductTotal,
   Wrapper,
 } from './ItemCart.styled';
+import { useDispatch } from 'react-redux';
+import { decrementQuantity, deleteCart, incrementQuantity } from '../../redux/CartSlice';
 
 const ItemCart = (item) => {
-  //   const Item = [
-  //     {
-  //       id: 1,
-  //       img: '1',
-  //       name: 'ca phe',
-  //       price: '100',
-  //       quantity: '1',
-  //     },
-  //   ];
+  const dispatch = useDispatch();
+  const handleDeteleItem = (id) => {
+    dispatch(deleteCart(id));
+  };
   return (
     <>
       <Container>
         <Wrapper>
-          <ProductImg src={images.Login}></ProductImg>
-          <ProductName>{item.name}</ProductName>
+          <ProductImg src={item.item.img}></ProductImg>
+          <ProductName>{item.item.name}</ProductName>
         </Wrapper>
-        <ProductPrice>{item.price}</ProductPrice>
+        <ProductPrice>{item.item.price} $</ProductPrice>
         <ProductQuantity>
-          <input type="text" />
+          <div className="cartItem-incrDec">
+            <button onClick={() => dispatch(decrementQuantity(item.item.id))}>-</button>
+            <span>{item.item.quantity}</span>
+            <button onClick={() => dispatch(incrementQuantity(item.item.id))}>+</button>
+          </div>
         </ProductQuantity>
-        <ProductTotal>{item.price}</ProductTotal>
+        <ProductTotal>{item.item.price * item.item.quantity} $</ProductTotal>
         <ProductRemove>
-          <DeleteOutlined />
+          <DeleteOutlined onClick={() => handleDeteleItem(item.item.id)} />
         </ProductRemove>
       </Container>
     </>

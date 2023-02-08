@@ -31,8 +31,15 @@ export const ProductPrice = styled.div`
 `;
 export const ProductQuantity = styled.div`
   width: 15%;
-  input {
-    width: 5rem;
+  button {
+    margin: 2rem
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  span {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #7e7e7e;
   }
 `;
 export const ProductTotal = styled.div`

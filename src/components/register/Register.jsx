@@ -19,26 +19,6 @@ const Register = () => {
     };
     registerUser(newUser, dispatch, navigate);
   };
-  // const registerUrl = 'http://viet.fresher.ameladev.click/api/register';
-  // const onFinish = async (values) => {
-  //   const instance = axios.create({ baseURL: registerUrl, timeout: 1000 });
-  //   const registerData = { name: values.name, email: values.email, password: values.password };
-  //   // console.log(registerData);
-  //   await instance
-  //     .post(registerUrl, registerData)
-
-  //     .then(function (response) {
-  //       if (!response.data.user.token) {
-  //         console.log('register failed');
-  //       }
-  //       console.log(response);
-  //       localStorage.setItem('token', response.data.authorisation.token);
-  //       navigate('/homepage');
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
   return (
     <Container>
       <Wrapper>

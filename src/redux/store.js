@@ -24,5 +24,10 @@ const store = configureStore({
       },
     }),
 });
+export const resetStore = async () => {
+  await persistor.purge();
+  store.dispatch(resetStore());
+  await persistor.flush();
+};
 export let persistor = persistStore(store);
 export default store;

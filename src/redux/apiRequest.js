@@ -10,6 +10,7 @@ import {
 import request from '../API';
 import { resetCart } from './CartSlice';
 import { showProfile } from './ProfileSlice';
+import axios from 'axios';
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
@@ -46,13 +47,22 @@ export const logOut = async (dispatch, navigate, token) => {
     console.log(error);
   }
 };
-export const show = async ( dispatch, token) => {
+export const show = async (dispatch, token) => {
   try {
     await request.get('profile-user', {
       headers: { Authorization: `Bearer ${token}` },
     });
-    dispatch(showProfile())
+    dispatch(showProfile());
   } catch (error) {
     console.log(error);
   }
+};
+export const getProduct = async (search) => {
+  const data = await axios
+    .get(`http://172.16.21.143/api/admin/all-product`)
+    .then((response) => response)
+    .catch((error) => {
+      console.log(error);
+    });
+  return data;
 };

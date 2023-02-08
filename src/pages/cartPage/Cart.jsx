@@ -5,7 +5,7 @@ import { CartTiltes, ListItemCart, Payment, PaymentBtn, SubTotal, Wrapper } from
 import { useSelector } from 'react-redux';
 
 const Cart = () => {
-  const { cart } = useSelector((item) => item.cart);
+  const { cart } = useSelector((state) => state.cart);
   return (
     <>
       <Header></Header>
@@ -19,14 +19,16 @@ const Cart = () => {
         </CartTiltes>
       </Wrapper>
       <ListItemCart>
-        {cart?.map((item) => (
-          <ItemCart item={item}></ItemCart>
+        {cart?.map((item, index) => (
+          <ItemCart key={index} item={item}></ItemCart>
         ))}
       </ListItemCart>
       <Payment>
         <SubTotal>
           <span className="subtotal">Subtotal</span>
-          <span className="money">88$</span>
+          <span className="money">
+            {cart.reduce((total, item) => total + item.quantity * parseInt(item.price), 0)} $
+          </span>
         </SubTotal>
         <PaymentBtn>
           <span>Payment</span>
