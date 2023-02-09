@@ -4,7 +4,7 @@ import Header from '../../components/header/Header';
 import { Content } from './Profile.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../redux/apiRequest';
+import { logOut, updateProfile } from '../../redux/apiRequest';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
@@ -15,14 +15,21 @@ const ProfilePage = () => {
   const token = user?.authorisation.token;
   const profile = useSelector((state) => state.profile.userProfile);
 
-
   const genderUser = (gender) => {
     return gender === 1 ? 'Nam' : 'Nữ';
   };
   const handleLogout = () => {
     logOut(dispatch, navigate, token);
   };
-  const handelUpdate = () => {};
+  const onFinish = (values) => {
+    const genderUpdate = values.gender;
+    const userUpdate = {
+      phone: values.phone,
+      address: values.address,
+      gender: genderUpdate === 'Nam' ? 1 : 0,
+    };
+    updateProfile(userUpdate, token);
+  };
   return (
     <>
       <Header></Header>
@@ -30,7 +37,7 @@ const ProfilePage = () => {
         <Form
           form={form}
           name="update"
-          // onFinish={onFinish}
+          onFinish={onFinish}
           initialValues={{
             email: [user.user.email],
             name: [user.user.name],
@@ -44,25 +51,15 @@ const ProfilePage = () => {
           }}
           scrollToFirstError
         >
-          <Form.Item
-            name="email"
-            label="E-mail"
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-            ]}
-          >
-            <Input />
+          <Form.Item name="email" label="E-mail">
+            <Input disabled={true} />
           </Form.Item>
           <Form.Item name="name" label="Name" tooltip="What do you want others to call you?">
-            <Input />
+            <Input disabled={true} />
           </Form.Item>
 
           <Form.Item name="phone" label="Phone ">
             <Input
-              //   addonBefore={prefixSelector}
               style={{
                 width: '100%',
               }}
@@ -89,7 +86,7 @@ const ProfilePage = () => {
               </Button>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" onClick={handelUpdate}>
+              <Button type="primary" htmlType="submit">
                 Update
               </Button>
             </Form.Item>

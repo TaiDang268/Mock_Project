@@ -47,6 +47,18 @@ export const logOut = async (dispatch, navigate, token) => {
     console.log(error);
   }
 };
+export const updateProfile = async (userUpdate, token) => {
+  await request
+    .put('update-profile', userUpdate, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((respone) => {
+      console.log(respone);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 export const show = async (dispatch, token) => {
   try {
     await request.get('profile-user', {
@@ -57,9 +69,9 @@ export const show = async (dispatch, token) => {
     console.log(error);
   }
 };
-export const getProduct = async (search) => {
+export const getProduct = async (params) => {
   const data = await axios
-    .get(`http://172.16.21.143/api/admin/all-product`)
+    .get(`http://viet.fresher.ameladev.click/api/admin/all-product`, { params: params })
     .then((response) => response)
     .catch((error) => {
       console.log(error);

@@ -2,14 +2,15 @@ import styled from 'styled-components';
 import colors from '../../constants/colors';
 import { Button } from 'antd';
 export const Wrapper = styled.div`
+  width: 100%;
+
+  margin: 2rem 0;
+`;
+export const CartTiltes = styled.div`
   width: 80%;
   background-color: #ececec;
   border-radius: 2rem;
-
-  margin: 2rem 0 2rem 2rem;
-`;
-export const CartTiltes = styled.div`
-  width: 100%;
+  margin: 0 auto;
   display: flex;
   padding: 1rem;
   span {
@@ -33,7 +34,7 @@ export const CartTiltes = styled.div`
 `;
 export const ListItemCart = styled.div`
   width: 80%;
-  margin: 2rem 0 10rem 2rem;
+  margin: 2rem auto;
 `;
 
 export const Payment = styled.div`

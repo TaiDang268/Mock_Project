@@ -10,6 +10,9 @@ export const Container = styled.div`
 `;
 export const LoginImg = styled.img`
   width: 40rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const LoginForm = styled.div`
   padding-left: 5rem;

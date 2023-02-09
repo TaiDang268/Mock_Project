@@ -5,9 +5,14 @@ import { ListProduct } from './HomePage.styled';
 import { useQuery } from '@tanstack/react-query';
 import { getProduct } from '../../redux/apiRequest';
 import PaginationBar from '../../components/pagination/Pagination';
+import { useSearchParams } from 'react-router-dom';
 const HomePage = () => {
-  const productQuery = useQuery({ queryKey: ['product'], queryFn: () => getProduct() });
+  const [searchParams] = useSearchParams();
+  const params = Object.fromEntries([...searchParams]);
+  const productQuery = useQuery({ queryKey: ['product', params], queryFn: () => getProduct(params) });
   const listProduct = productQuery?.data?.data?.data;
+  const perPage = parseInt(productQuery?.data?.data?.per_page);
+  const total = parseInt(productQuery?.data?.data?.total);
   return (
     <>
       <Header></Header>
@@ -23,7 +28,7 @@ const HomePage = () => {
           ></Product>
         ))}
       </ListProduct>
-      <PaginationBar></PaginationBar>
+      <PaginationBar perPage={perPage} pageSize={total}></PaginationBar>
       <Footer></Footer>
     </>
   );
