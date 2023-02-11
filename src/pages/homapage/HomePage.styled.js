@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-
+export const WrapperListProduct = styled.div`
+  width: 100%;
+`;
 export const ListProduct = styled.div`
-  margin: 2rem 5%;
+  width: 90%;
+  margin: 2rem auto;
   display: flex;
   flex-wrap: wrap;
   padding: 0 auto;

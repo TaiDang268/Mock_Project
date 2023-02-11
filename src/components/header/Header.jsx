@@ -36,8 +36,9 @@ const Header = () => {
   const [clickHidenBar, setClickHidenBar] = useState(true);
   const handleClickHidenBar = () => {
     setClickHidenBar(!clickHidenBar);
-    console.log('hi');
   };
+  const isClicked=clickHidenBar;
+  console.log(isClicked)
   const onTabClick = (key) => {
     switch (key) {
       case '4':
@@ -55,7 +56,6 @@ const Header = () => {
       .then((response) => {
         const data = response.data.data.data;
         const arrCategory = data.reduce((list, item) => list.concat(item.name), []);
-        console.log(arrCategory);
       })
       .catch((error) => {
         console.log(error);
@@ -76,13 +76,10 @@ const Header = () => {
   };
   const onSearch = async (value) => {
     await axios
-      .get(`http://viet.fresher.ameladev.click/api/admin/search/${value}`)
-      .then((response) => {
-        console.log(response);
-        navigate('/homepage');
-      })
-      .catch((error) => {
-        console.log(error);
+      .get('http://172.16.21.143/api/admin/search/', {})
+      .then((response) => response)
+      .catch((err) => {
+        console.log(err);
       });
   };
   const onClick = ({ key }) => {
@@ -134,6 +131,7 @@ const Header = () => {
       label: `Contact`,
     },
   ];
+  
   return (
     <Container>
       <HeaderTop>
@@ -157,7 +155,7 @@ const Header = () => {
             <CloseOutlined style={{ fontSize: '40px', color: '#3bb77e' }} />
           )}
         </div>
-        <HeaderIcon>
+        <HeaderIcon isClicked={isClicked}>
           <CompareItem>
             <CompareIcon></CompareIcon>
             <a href="/">Compare</a>

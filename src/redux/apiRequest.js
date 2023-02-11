@@ -70,11 +70,22 @@ export const show = async (dispatch, token) => {
   }
 };
 export const getProduct = async (params) => {
-  const data = await axios
-    .get(`http://viet.fresher.ameladev.click/api/admin/all-product`, { params: params })
+  const data = await request
+    .get(`admin/all-product`, { params: params })
     .then((response) => response)
     .catch((error) => {
       console.log(error);
     });
   return data;
+};
+export const order = async (formData, navigate) => {
+  const config = { headers: { 'Content-Type': `application/json` } };
+  await axios
+    .post('http://172.16.21.143/api/order', JSON.stringify(formData), config)
+    .then((res) => {
+      navigate('/homepage');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };

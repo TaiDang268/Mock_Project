@@ -11,7 +11,6 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   width: 40%;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
 `;
 export const ProductImg = styled.img`
@@ -20,31 +19,41 @@ export const ProductImg = styled.img`
 `;
 export const ProductName = styled.div`
   padding-left: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1.6rem;
+  @media (max-width: 768px) {
+    font-size: 2.2vw;
+  }
+  @media (max-width: 562px) {
+    font-size: 1.4rem;
+  }
 `;
 export const ProductPrice = styled.div`
   width: 15%;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #7e7e7e;
 `;
 export const ProductQuantity = styled.div`
   width: 15%;
+  .cartItem-incrDec {
+    display: flex;
+    align-items: center;
+  }
   button {
-    margin: 2rem
-    width: 1.8rem;
-    height: 1.8rem;
+    margin: 1rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
   span {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #7e7e7e;
   }
 `;
 export const ProductTotal = styled.div`
   width: 15%;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: ${colors.green};
 `;

@@ -24,17 +24,21 @@ const ItemCart = (item) => {
           <ProductImg src={item.item.img}></ProductImg>
           <ProductName>{item.item.name}</ProductName>
         </Wrapper>
-        <ProductPrice>{item.item.price} $</ProductPrice>
+        <ProductPrice>{item.item.price_new} $</ProductPrice>
         <ProductQuantity>
           <div className="cartItem-incrDec">
-            <button onClick={() => dispatch(decrementQuantity(item.item.id))}>-</button>
+            <button className="increase" onClick={() => dispatch(decrementQuantity(item.item.id))}>
+              -
+            </button>
             <span>{item.item.quantity}</span>
-            <button onClick={() => dispatch(incrementQuantity(item.item.id))}>+</button>
+            <button className="decrease" onClick={() => dispatch(incrementQuantity(item.item.id))}>
+              +
+            </button>
           </div>
         </ProductQuantity>
-        <ProductTotal>{item.item.price * item.item.quantity} $</ProductTotal>
+        <ProductTotal>{item.item.price_new * item.item.quantity} $</ProductTotal>
         <ProductRemove>
-          <DeleteOutlined onClick={() => handleDeteleItem(item.item.id)} />
+          <DeleteOutlined style={{ color: 'red' }} onClick={() => handleDeteleItem(item.item.id)} />
         </ProductRemove>
       </Container>
     </>

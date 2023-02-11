@@ -44,7 +44,7 @@ export const HeaderBetween = styled.div`
   .icon-wrap-all-mobile {
     display: none;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .icon-wrap-all-mobile {
       display: block;
       margin: auto;
@@ -53,7 +53,7 @@ export const HeaderBetween = styled.div`
 `;
 export const LogoShop = styled.img`
   width: 18rem;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 `;
@@ -63,7 +63,7 @@ export const SearchForm = styled(Search)`
   justify-content: center;
   align-items: center;
   padding-left: 10rem;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 80%;
     margin: 0 auto;
     padding: 0;
@@ -95,9 +95,9 @@ export const HeaderIcon = styled.div`
     color: ${colors.green};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
+    display: ${((props) => props.isClicked) ? 'flex' : 'none'};
     padding-left: 1rem;
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
