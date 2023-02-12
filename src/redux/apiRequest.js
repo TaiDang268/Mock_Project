@@ -21,14 +21,14 @@ export const loginUser = async (user, dispatch, navigate) => {
     dispatch(loginFailed());
   }
 };
-export const registerUser = async (user, dispatch, navigate) => {
+export const registerUser = async (user, dispatch) => {
   dispatch(registerStart());
   try {
-    await request.post('register', user);
+    const response = await request.post('register', user);
     dispatch(registerSuccess());
-    navigate('/login');
+    return response.status;
   } catch (err) {
-    dispatch(registerFailed());
+    console.log(err);
   }
 };
 export const logOut = async (dispatch, navigate, token) => {
@@ -48,16 +48,14 @@ export const logOut = async (dispatch, navigate, token) => {
   }
 };
 export const updateProfile = async (userUpdate, token) => {
-  await request
-    .put('update-profile', userUpdate, {
+  try {
+    const response = await request.put('update-profile', userUpdate, {
       headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((respone) => {
-      console.log(respone);
-    })
-    .catch((error) => {
-      console.log(error);
     });
+    return response.status;
+  } catch (error) {
+    console.log(error);
+  }
 };
 export const show = async (dispatch, token) => {
   try {
@@ -79,14 +77,13 @@ export const getProduct = async (params) => {
   return data;
 };
 
-export const order = async (formData, navigate) => {
-  const config = { headers: { 'Content-Type': `application/json` } };
-  await request
-    .post('order', JSON.stringify(formData), config)
-    .then((res) => {
-      console.log('success order');
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+export const order = async (formData) => {
+  try {
+    const config = { headers: { 'Content-Type': `application/json` } };
+    const response = await request.post('order', JSON.stringify(formData), config);
+    console.log(response.status);
+    return response.status;
+  } catch (error) {
+    console.log(error);
+  }
 };

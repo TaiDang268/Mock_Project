@@ -1,4 +1,4 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 import { Content } from './Profile.styled';
@@ -14,22 +14,32 @@ const ProfilePage = () => {
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
   const profile = useSelector((state) => state.profile.userProfile);
-
   const genderUser = (gender) => {
     return gender === 1 ? 'Nam' : 'Nữ';
   };
   const handleLogout = () => {
     logOut(dispatch, navigate, token);
   };
-  const onFinish = (values) => {
+  let statusRes = 0;
+  const onFinish = async (values) => {
     const genderUpdate = values.gender;
     const userUpdate = {
       phone: values.phone,
       address: values.address,
       gender: genderUpdate === 'Nam' ? 1 : 0,
     };
-    updateProfile(userUpdate, token);
+    try {
+      statusRes = await updateProfile(userUpdate, token);
+      if (statusRes == 200 || statusRes == 204) {
+        message.success('Update Succeed', 3);
+      } else {
+        message.error('Update Failed', 3);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <>
       <Header></Header>
