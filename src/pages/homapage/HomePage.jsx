@@ -13,7 +13,6 @@ const HomePage = () => {
   const listProduct = productQuery?.data?.data?.data;
   const perPage = parseInt(productQuery?.data?.data?.per_page);
   const total = parseInt(productQuery?.data?.data?.total);
-  console.log(listProduct);
   return (
     <>
       <Header></Header>

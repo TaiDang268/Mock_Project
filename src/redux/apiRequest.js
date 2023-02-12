@@ -78,12 +78,13 @@ export const getProduct = async (params) => {
     });
   return data;
 };
+
 export const order = async (formData, navigate) => {
   const config = { headers: { 'Content-Type': `application/json` } };
-  await axios
-    .post('http://172.16.21.143/api/order', JSON.stringify(formData), config)
+  await request
+    .post('order', JSON.stringify(formData), config)
     .then((res) => {
-      navigate('/homepage');
+      console.log('success order');
     })
     .catch((error) => {
       console.log(error);

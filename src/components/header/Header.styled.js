@@ -13,6 +13,9 @@ export const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 376px) {
+    display: none;
+  }
 `;
 export const TextLeft = styled.div`
   display: flex;
@@ -34,6 +37,9 @@ export const TextRight = styled.div`
     font-weight: 400;
     color: #7e7e7e;
     padding-right: 1.5rem;
+  }
+  @media (max-width: 550px) {
+    display: none;
   }
 `;
 export const HeaderBetween = styled.div`
@@ -96,24 +102,25 @@ export const HeaderIcon = styled.div`
   }
 
   @media (max-width: 1024px) {
-    display: ${((props) => props.isClicked) ? 'flex' : 'none'};
+    display: ${(props) => props.display};
     padding-left: 1rem;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    position: fixed;
+    position: absolute;
     top: 15rem;
     right: -17rem;
     width: 30rem;
-    background-color: gray;
+    background-color: #ced7d3;
     border-radius: 1rem;
+    z-index: 2;
   }
 `;
 
 export const CompareItem = styled.div`
   padding-right: 2rem;
-  @media (max-width: 768px) {
-    margin: 1rem 0;
+  @media (max-width: 1024px) {
+    margin: 1.5rem 0;
   }
 `;
 export const CompareIcon = styled(TransactionOutlined)`
@@ -121,8 +128,8 @@ export const CompareIcon = styled(TransactionOutlined)`
 `;
 export const WishListItem = styled.div`
   padding-right: 2rem;
-  @media (max-width: 768px) {
-    margin: 1rem 0;
+  @media (max-width: 1024px) {
+    margin: 1.5rem 0;
   }
 `;
 export const WishListIcon = styled(HeartOutlined)`
@@ -131,8 +138,25 @@ export const WishListIcon = styled(HeartOutlined)`
 
 export const CartItem = styled.div`
   padding-right: 2rem;
-  @media (max-width: 768px) {
-    margin: 1rem 0;
+  position: relative;
+  @media (max-width: 1024px) {
+    margin: 1.5rem 0;
+  }
+`;
+export const Notification = styled.div`
+  width: 18px;
+  height: 18px;
+  color: white;
+  border-radius: 50%;
+  background-color: ${colors.green};
+  position: absolute;
+  top: -6px;
+  right: 51px;
+  span {
+    margin: auto auto;
+    position: absolute;
+    top: -2px;
+    right: 3.5px;
   }
 `;
 export const CartIcon = styled(ShoppingCartOutlined)`
@@ -143,8 +167,8 @@ export const LoginItem = styled.div`
   .logined-name {
     color: ${colors.green};
   }
-  @media (max-width: 768px) {
-    margin: 1rem 0;
+  @media (max-width: 1024px) {
+    margin: 1.5rem 0;
   }
 `;
 export const LoginIcon = styled(UserOutlined)`

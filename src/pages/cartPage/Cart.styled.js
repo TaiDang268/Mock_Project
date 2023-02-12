@@ -17,35 +17,54 @@ export const CartTiltes = styled.div`
     font-weight: 400;
     font-size: 1.8rem;
   }
-  @media (max-width: 768px) {
-    span {
-      font-size: 2vw;
-    }
-  }
-  @media (max-width: 680px) {
-    span {
-      font-size: 2.2vw;
-    }
-  }
+
   .product {
-    width: 40%;
+    width: 35%;
   }
   .price {
     width: 15%;
   }
   .quantity {
-    width: 15%;
+    width: 20%;
   }
   .total {
     width: 15%;
+    padding-left: 2rem;
   }
   .remove {
-    width: 15%;
+    width: 10%;
+  }
+  @media (max-width: 768px) {
+    width: 95%;
+    span {
+      font-size: 1.6rem;
+    }
+    .product {
+      width: 50%;
+    }
+    .price {
+      width: 15%;
+    }
+    .quantity {
+      width: 25%;
+    }
+    .total {
+      display: none;
+    }
+    .remove {
+      width: 10%;
+    }
+  }
+  @media (max-width: 543px) {
+    display: none;
   }
 `;
 export const ListItemCart = styled.div`
   width: 80%;
   margin: 2rem auto;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 export const PaymentContainer = styled.div`
@@ -54,6 +73,9 @@ export const PaymentContainer = styled.div`
   border-radius: 0.5rem;
   border: 0.05rem solid #f3e0e0;
   margin-bottom: 4rem;
+  @media (max-width: 438px) {
+    width: 90%;
+  }
 `;
 export const SubTotal = styled.div`
   padding 1rem 2rem;
@@ -69,9 +91,13 @@ export const SubTotal = styled.div`
      font-weight:700;
     color:${colors.green};
   }
+ 
 `;
 export const WrapperBtn = styled.div`
   margin: 1rem 70%;
+  @media (max-width: 440px) {
+    margin: 1rem 40%;
+  }
 `;
 export const PaymentMethod = styled.div`
   span {

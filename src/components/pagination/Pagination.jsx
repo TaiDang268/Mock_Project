@@ -10,7 +10,7 @@ const PaginationBar = ({ perPage, pageSize }) => {
   const params = Object.fromEntries([...searchParams]);
   const onChange = (values) => {
     setCurrent(values);
-    navigate({ pathname, search: createSearchParams({ ...params, page: values.toString() }).toString() });
+    navigate({ pathname, search: createSearchParams({ ...params, page: values.toString() || '' }).toString() });
   };
   return (
     <Container>

@@ -13,6 +13,7 @@ import {
   LoginIcon,
   LoginItem,
   LogoShop,
+  Notification,
   SearchForm,
   TextLeft,
   TextRight,
@@ -23,22 +24,24 @@ import images from '../../assets/images';
 import { CloseOutlined, DownOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Dropdown, message, Space } from 'antd';
 import { Tabs } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, createSearchParams, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import request from '../../API';
 import { showProfile } from '../../redux/ProfileSlice';
 import axios from 'axios';
 import { useState } from 'react';
+import { getProduct } from '../../redux/apiRequest';
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const [searchParams] = useSearchParams();
+  const params = Object.fromEntries([...searchParams]);
   const [clickHidenBar, setClickHidenBar] = useState(true);
   const handleClickHidenBar = () => {
     setClickHidenBar(!clickHidenBar);
   };
-  const isClicked=clickHidenBar;
-  console.log(isClicked)
   const onTabClick = (key) => {
     switch (key) {
       case '4':
@@ -48,6 +51,7 @@ const Header = () => {
     }
   };
 
+  const { cart } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
   const handleAllCategory = async () => {
@@ -75,12 +79,7 @@ const Header = () => {
       });
   };
   const onSearch = async (value) => {
-    await axios
-      .get('http://172.16.21.143/api/admin/search/', {})
-      .then((response) => response)
-      .catch((err) => {
-        console.log(err);
-      });
+    navigate({ pathname, search: createSearchParams({ ...params, search: value.toString() }).toString() });
   };
   const onClick = ({ key }) => {
     message.info(`Click on item ${key}`);
@@ -131,7 +130,7 @@ const Header = () => {
       label: `Contact`,
     },
   ];
-  
+
   return (
     <Container>
       <HeaderTop>
@@ -155,7 +154,7 @@ const Header = () => {
             <CloseOutlined style={{ fontSize: '40px', color: '#3bb77e' }} />
           )}
         </div>
-        <HeaderIcon isClicked={isClicked}>
+        <HeaderIcon display={clickHidenBar ? 'none' : 'flex'}>
           <CompareItem>
             <CompareIcon></CompareIcon>
             <a href="/">Compare</a>
@@ -165,7 +164,10 @@ const Header = () => {
             <a href="/">Wishlist</a>
           </WishListItem>
           <CartItem>
-            <CartIcon></CartIcon>
+            <Notification>
+              <span>{cart.length}</span>
+            </Notification>
+            <CartIcon />
             <Link to="/cart">Cart</Link>
           </CartItem>
           {user ? (

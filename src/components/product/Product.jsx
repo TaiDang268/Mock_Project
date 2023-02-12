@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { AddCart } from '../../redux/CartSlice';
 const Product = (dataItem) => {
   const dispatch = useDispatch();
-  console.log(dataItem);
   return (
     <Container>
       <ProductImg src={dataItem.data.images[0].link}></ProductImg>

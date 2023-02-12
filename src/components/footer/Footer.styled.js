@@ -8,6 +8,13 @@ export const Container = styled.div`
 `;
 export const FooterColumnStart = styled.div`
   width: 20%;
+  @media (max-width: 832px) {
+    display: none;
+  }
+  @media (max-width: 510px) {
+    display: block;
+    width: 45%;
+  }
 `;
 export const LogoShop = styled.img`
   width: 18rem;
@@ -35,12 +42,19 @@ export const WraperText = styled.a`
     color: ${colors.green};
   }
 `;
+
 export const FooterColumnCenter = styled.div`
   width: 15%;
   padding-left: 2rem;
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
+  @media (max-width: 832px) {
+    width: 25%;
+  }
+  @media (max-width: 510px) {
+    display: none;
+  }
 `;
 
 export const FooterColumnEnd = styled.div`
@@ -49,6 +63,13 @@ export const FooterColumnEnd = styled.div`
   padding: 2rem 2rem 0 2rem;
   p {
     padding: 1rem 0;
+  }
+  @media (max-width: 832px) {
+    display: none;
+  }
+  @media (max-width: 510px) {
+    display: block;
+    width: 45%;
   }
 `;
 export const AppStoreImg = styled.img`
@@ -63,4 +84,6 @@ export const CHPlayImg = styled.img`
     cursor: pointer;
   }
 `;
-export const GateWayImg = styled.img``;
+export const GateWayImg = styled.img`
+  width: 90%;
+`;

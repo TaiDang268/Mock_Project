@@ -21,7 +21,7 @@ const ItemCart = (item) => {
     <>
       <Container>
         <Wrapper>
-          <ProductImg src={item.item.img}></ProductImg>
+          <ProductImg src={item.item.images[0].link}></ProductImg>
           <ProductName>{item.item.name}</ProductName>
         </Wrapper>
         <ProductPrice>{item.item.price_new} $</ProductPrice>
