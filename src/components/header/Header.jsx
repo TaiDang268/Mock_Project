@@ -28,9 +28,7 @@ import { Link, createSearchParams, useLocation, useNavigate, useSearchParams } f
 import { useDispatch, useSelector } from 'react-redux';
 import request from '../../API';
 import { showProfile } from '../../redux/ProfileSlice';
-import axios from 'axios';
 import { useState } from 'react';
-import { getProduct } from '../../redux/apiRequest';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -39,66 +37,9 @@ const Header = () => {
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries([...searchParams]);
   const [clickHidenBar, setClickHidenBar] = useState(true);
-  const handleClickHidenBar = () => {
-    setClickHidenBar(!clickHidenBar);
-  };
-  const onTabClick = (key) => {
-    switch (key) {
-      case '4':
-        navigate('/homepage');
-        break;
-      default:
-    }
-  };
-
   const { cart } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
-  const handleAllCategory = async () => {
-    await request
-      .get('admin/list-category')
-      .then((response) => {
-        const data = response.data.data.data;
-        const arrCategory = data.reduce((list, item) => list.concat(item.name), []);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleShowProfile = async () => {
-    await request
-      .get('profile-user', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(function (response) {
-        dispatch(showProfile(response.data.profile));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-  const onSearch = async (value) => {
-    navigate({ pathname, search: createSearchParams({ ...params, search: value.toString() }).toString() });
-  };
-  const onClick = ({ key }) => {
-    message.info(`Click on item ${key}`);
-  };
-
-  const items = [
-    {
-      label: '1st menu item',
-      key: '1',
-    },
-    {
-      label: '2nd menu item',
-      key: '2',
-    },
-    {
-      label: '3rd menu item',
-      key: '3',
-    },
-  ];
 
   const itemsNavigation = [
     {
@@ -130,6 +71,67 @@ const Header = () => {
       label: `Contact`,
     },
   ];
+
+  const handleClickHidenBar = () => {
+    setClickHidenBar(!clickHidenBar);
+  };
+  const onTabClick = (key) => {
+    switch (key) {
+      case '4':
+        navigate('/homepage');
+        break;
+      default:
+    }
+  };
+  // const getCate = async () => {
+  //   try {
+  //     const res = await request.get('admin/list-category');
+  //     return res.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const data = useQuery({ queryKey: 'category', queryFn: () => getCate() });
+  // let arrCategory = [];
+  // for (let item of data.data.data.data) {
+  //   let params = { label: item.name, key: item.id };
+  //   arrCategory = [...arrCategory, params];
+  // }
+  // // console.log(arrCategory);
+
+  let items = [
+    {
+      label: '1st menu item',
+      key: '1',
+    },
+    {
+      label: '2nd menu item',
+      key: '2',
+    },
+    {
+      label: '3rd menu item',
+      key: '3',
+    },
+  ];
+
+  const handleShowProfile = async () => {
+    await request
+      .get('profile-user', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(function (response) {
+        dispatch(showProfile(response.data.profile));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const onSearch = async (value) => {
+    navigate({ pathname, search: createSearchParams({ ...params, search: value.toString() }).toString() });
+  };
+  const onClick = ({ key }) => {
+    message.info(`Click on item ${key}`);
+  };
 
   return (
     <Container>
@@ -193,7 +195,7 @@ const Header = () => {
               onClick,
             }}
           >
-            <Space onClick={handleAllCategory}>
+            <Space>
               All Category
               <DownOutlined />
             </Space>

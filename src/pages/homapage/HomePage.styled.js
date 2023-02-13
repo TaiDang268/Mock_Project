@@ -4,7 +4,7 @@ export const WrapperListProduct = styled.div`
 `;
 export const ListProduct = styled.div`
   width: 90%;
-  margin: 2rem auto;
+  margin: 1rem auto;
   display: flex;
   flex-wrap: wrap;
   padding: 0 auto;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import colors from '../../constants/colors';
 import { Button } from 'antd';
+import breakPoints from '../../constants/breakPoints';
 
 export const Container = styled.div`
   width: 18%;
@@ -13,11 +14,11 @@ export const Container = styled.div`
   :hover {
     border: 0.1rem solid ${colors.green};
   }
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     width: 21%;
     margin: 2rem 2%;
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     width: 27%;
     height: 23rem;
     margin: 2rem 3%;
@@ -48,10 +49,10 @@ export const ProductCategory = styled.h6`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     padding: 0 1rem;
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
   }
 `;
 
@@ -62,7 +63,7 @@ export const ProductName = styled.h4`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     font-size: 1.3rem;
   }
 `;
@@ -71,7 +72,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     padding: 0 1rem;
   }
 `;
@@ -97,11 +98,11 @@ export const AddBtn = styled(Button)`
       color: white;
     }
   }
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     width: 40%;
     height: 40%;
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     width: 50%;
     height: 50%;
     span {

@@ -14,13 +14,13 @@ const ProfilePage = () => {
   const user = useSelector((state) => state.auth.login.currentUser);
   const token = user?.authorisation.token;
   const profile = useSelector((state) => state.profile.userProfile);
+  let statusRes = 0;
   const genderUser = (gender) => {
     return gender === 1 ? 'Nam' : 'Nữ';
   };
   const handleLogout = () => {
     logOut(dispatch, navigate, token);
   };
-  let statusRes = 0;
   const onFinish = async (values) => {
     const genderUpdate = values.gender;
     const userUpdate = {
@@ -30,7 +30,7 @@ const ProfilePage = () => {
     };
     try {
       statusRes = await updateProfile(userUpdate, token);
-      if (statusRes == 200 || statusRes == 204) {
+      if (statusRes === 200 || statusRes === 204) {
         message.success('Update Succeed', 3);
       } else {
         message.error('Update Failed', 3);

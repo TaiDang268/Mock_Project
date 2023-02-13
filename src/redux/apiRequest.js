@@ -1,16 +1,7 @@
-import {
-  loginFailed,
-  loginStart,
-  loginSuccess,
-  logoutSuccess,
-  registerFailed,
-  registerStart,
-  registerSuccess,
-} from './AuthSlice';
+import { loginFailed, loginStart, loginSuccess, logoutSuccess, registerStart, registerSuccess } from './AuthSlice';
 import request from '../API';
 import { resetCart } from './CartSlice';
 import { showProfile } from './ProfileSlice';
-import axios from 'axios';
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
@@ -68,13 +59,12 @@ export const show = async (dispatch, token) => {
   }
 };
 export const getProduct = async (params) => {
-  const data = await request
-    .get(`admin/all-product`, { params: params })
-    .then((response) => response)
-    .catch((error) => {
-      console.log(error);
-    });
-  return data;
+  try {
+    const data = await request.get(`admin/all-product`, { params: params });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const order = async (formData) => {

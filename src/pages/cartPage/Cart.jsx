@@ -22,10 +22,10 @@ const Cart = () => {
   const token = user?.authorisation.token;
   const user_id = user.user.id;
   const { cart } = useSelector((state) => state.cart);
+  const paymentMethod = valueMethodPayment;
   const onChangeMethodPayment = (e) => {
     setValueMethodPayment(e.target.value);
   };
-  const paymentMethod = valueMethodPayment;
   const subTotal = cart.reduce((total, item) => total + item.quantity * parseInt(item.price_new), 0);
   const handleClickPaymentBtn = async () => {
     let listProductOrder = [];
@@ -42,7 +42,7 @@ const Cart = () => {
     };
     try {
       statusRes = await order(formData);
-      if (statusRes == 200 || statusRes == 204) {
+      if (statusRes === 200 || statusRes === 204) {
         message.success('Payment Succeed', 3);
       } else {
         message.error('Payment Failed', 3);

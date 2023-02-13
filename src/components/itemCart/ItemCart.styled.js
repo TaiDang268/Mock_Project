@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import colors from '../../constants/colors';
+import breakPoints from '../../constants/breakPoints';
 
 export const Container = styled.div`
   display: flex;
   border: 0.05rem solid #f3e0e0;
   align-items: center;
   margin: 1rem 0;
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
   }
 `;
 export const Wrapper = styled.div`
   width: 40%;
   display: flex;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     width: 50%;
   }
 `;
@@ -25,7 +26,7 @@ export const ProductName = styled.div`
   padding-left: 1rem;
   font-weight: 400;
   font-size: 1.6rem;
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     font-size: 2.2vw;
   }
   @media (max-width: 562px) {
@@ -54,7 +55,7 @@ export const ProductQuantity = styled.div`
     font-weight: 700;
     color: #7e7e7e;
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     button {
       margin: 0.5rem;
       width: 1.7rem;
@@ -67,7 +68,7 @@ export const ProductTotal = styled.div`
   font-size: 1.8rem;
   font-weight: 700;
   color: ${colors.green};
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     display: none;
   }
 `;
@@ -76,7 +77,7 @@ export const ProductRemove = styled.div`
   :hover {
     cursor: pointer;
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     width: 10%;
   }
 `;

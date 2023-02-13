@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Input, Menu } from 'antd';
 import colors from '../../constants/colors';
 import { HeartOutlined, ShoppingCartOutlined, UserOutlined, TransactionOutlined } from '@ant-design/icons';
+import breakPoints from '../../constants/breakPoints';
 const { Search } = Input;
 export const Container = styled.div`
   display: flex;
@@ -50,7 +51,7 @@ export const HeaderBetween = styled.div`
   .icon-wrap-all-mobile {
     display: none;
   }
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     .icon-wrap-all-mobile {
       display: block;
       margin: auto;
@@ -59,7 +60,7 @@ export const HeaderBetween = styled.div`
 `;
 export const LogoShop = styled.img`
   width: 18rem;
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     display: none;
   }
 `;
@@ -69,7 +70,7 @@ export const SearchForm = styled(Search)`
   justify-content: center;
   align-items: center;
   padding-left: 10rem;
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     width: 80%;
     margin: 0 auto;
     padding: 0;
@@ -101,7 +102,7 @@ export const HeaderIcon = styled.div`
     color: ${colors.green};
   }
 
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     display: ${(props) => props.display};
     padding-left: 1rem;
     flex-direction: column;
@@ -119,7 +120,7 @@ export const HeaderIcon = styled.div`
 
 export const CompareItem = styled.div`
   padding-right: 2rem;
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     margin: 1.5rem 0;
   }
 `;
@@ -128,7 +129,7 @@ export const CompareIcon = styled(TransactionOutlined)`
 `;
 export const WishListItem = styled.div`
   padding-right: 2rem;
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     margin: 1.5rem 0;
   }
 `;
@@ -139,7 +140,7 @@ export const WishListIcon = styled(HeartOutlined)`
 export const CartItem = styled.div`
   padding-right: 2rem;
   position: relative;
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     margin: 1.5rem 0;
   }
 `;
@@ -167,13 +168,13 @@ export const LoginItem = styled.div`
   .logined-name {
     color: ${colors.green};
   }
-  @media (max-width: 1024px) {
+  @media (${breakPoints.laptop}) {
     margin: 1.5rem 0;
   }
 `;
 export const LoginIcon = styled(UserOutlined)`
   padding: 1rem;
-  @media (max-width: 768px);
+  @media (${breakPoints.tablet});
    {
     padding: 0;
     padding-right: 1rem;
@@ -187,7 +188,7 @@ export const HeaderBottom = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
   }
 `;
 export const HeaderDropDown = styled.div`
@@ -205,7 +206,7 @@ export const HeaderDropDown = styled.div`
     height: 5rem;
     background-color: ${colors.green};
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     display: none;
   }
 `;
@@ -224,7 +225,7 @@ export const HeaderNavigation = styled.div`
   .ant-tabs-tab:hover {
     color: ${colors.green} !important;
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     padding: 0;
     margin: 0 auto;
   }

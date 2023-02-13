@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import colors from '../../constants/colors';
 import { Button } from 'antd';
+import breakPoints from '../../constants/breakPoints';
 export const Wrapper = styled.div`
   width: 100%;
 
@@ -34,7 +35,7 @@ export const CartTiltes = styled.div`
   .remove {
     width: 10%;
   }
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     width: 95%;
     span {
       font-size: 1.6rem;
@@ -62,7 +63,7 @@ export const CartTiltes = styled.div`
 export const ListItemCart = styled.div`
   width: 80%;
   margin: 2rem auto;
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     width: 95%;
   }
 `;

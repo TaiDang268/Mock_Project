@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getProduct } from '../../redux/apiRequest';
 import PaginationBar from '../../components/pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
+import Filter from '../../components/filter/Filter';
 const HomePage = () => {
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries([...searchParams]);
@@ -16,6 +17,7 @@ const HomePage = () => {
   return (
     <>
       <Header></Header>
+      <Filter></Filter>
       <WrapperListProduct>
         <ListProduct>
           {listProduct?.map((item) => (

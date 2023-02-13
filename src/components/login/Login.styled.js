@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import colors from '../../constants/colors';
+import breakPoints from '../../constants/breakPoints';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -10,7 +11,7 @@ export const Container = styled.div`
 `;
 export const LoginImg = styled.img`
   width: 40rem;
-  @media (max-width: 768px) {
+  @media (${breakPoints.tablet}) {
     display: none;
   }
 `;
